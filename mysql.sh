@@ -22,10 +22,10 @@ VALIDATE(){
 
 CHECK_ROOT(){
     if [$UserId -ne 0]
-then
-   echo "you must have root user access to execute scipt"
-   exit1
-fi
+    then
+        echo "you must have root user access to execute scipt"
+        exit1
+    fi
 }
 
 echo "script statrted executing at: $Timestamp" &>>LOG_FILE_NAME
