@@ -40,8 +40,17 @@ VALIDATE $? "Enabling Mysql server"
 systemctl start mysqld &>>LOG_FILE_NAME
 VALIDATE $? "starting Mysql server"
 
-mysql_secure_installation --set-root-pass RoboShop@1 
-VALIDATE $? "setting root password"
+mysql -h mysql.aslearnings.fun -u root -pRoboShop@1 -e 'show databases;'
+
+if [ $? -ne 0]
+then
+    echo "MySQL Root password not setup" &>>$LOG_FILE_NAME 
+    mysql_secure_installation --set-root-pass RoboShop@1 
+    VALIDATE $? "setting root password"
+else
+    echo -e "MySQL Root password already setup ... $Y SKIPPING $N"
+fi    
+
 
 
 
