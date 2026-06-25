@@ -40,7 +40,8 @@ VALIDATE $? "Enabling Mysql server"
 systemctl start mysqld &>>LOG_FILE_NAME
 VALIDATE $? "starting Mysql server"
 
-mysql_secure_installation --set-root-pass RoboShop@1 &>>LOG_FILE_NAME
+mysql_secure_installation --set-root-pass RoboShop@1 
+VALIDATE $? "setting root password"
 
 
 
