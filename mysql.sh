@@ -12,7 +12,7 @@ Timestamp=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$Log_Folder/$Log_File-$Timestamp.log"
 
 VALIDATE(){
-    if [$1 -ne 0]
+    if [ $1 -ne 0 ]
     then
        echo -e "$2 ... $R FAILURE $N"
     else
@@ -21,7 +21,7 @@ VALIDATE(){
 }
 
 CHECK_ROOT(){
-    if [$UserId -ne 0]
+    if [ $UserId -ne 0 ]
     then
         echo "you must have root user access to execute scipt"
         exit1
