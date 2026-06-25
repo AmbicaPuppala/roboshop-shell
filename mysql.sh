@@ -40,7 +40,7 @@ VALIDATE $? "Enabling Mysql server"
 systemctl start mysqld &>>LOG_FILE_NAME
 VALIDATE $? "starting Mysql server"
 
-mysql -h mysql.aslearnings.fun -u root -pRoboShop@1 -e 'show databases;'
+mysql -h mysql.aslearnings.fun -u root -pRoboShop@1 -e 'show databases;'&>>$LOG_FILE_NAME 
 
 if [ $? -ne 0]
 then
