@@ -28,39 +28,39 @@ CHECK_ROOT(){
     fi
 }
 
-echo "script started ececuting at : $Timestamp" &>>LOG_FILE_NAME
+echo "script started ececuting at : $Timestamp" &>>$LOG_FILE_NAME
 CHECK_ROOT
 
-dnf module disable nodejs -y &>>LOG_FILE_NAME
+dnf module disable nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Disabling old version"
 
-dnf module enable nodejs:20 -y &>>LOG_FILE_NAME
+dnf module enable nodejs:20 -y &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling new version"
 
-dnf install nodejs -y &>>LOG_FILE_NAME
+dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>LOG_FILE_NAME
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE_NAME
 VALIDATE $? "Adding user"
 
-mkdir /app &>>LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
 
-curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &>>LOG_FILE_NAME
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip  &>>$LOG_FILE_NAME
 VALIDATE $? "Downloading code"
 
-cd /app &>>LOG_FILE_NAME
+cd /app &>>$LOG_FILE_NAME
 VALIDATE $? "changing directory"
 
-unzip /tmp/catalogue.zip &>>LOG_FILE_NAME
+unzip /tmp/catalogue.zip &>>$LOG_FILE_NAME
 VALIDATE $? "unzipping code"
  
-npm install &>>LOG_FILE_NAME
+npm install &>>$LOG_FILE_NAME
 VALIDATE $? "installing dependencies"
 
 cp /home/ec2-user/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
 
-systemctl daemon-reload  &>>LOG_FILE_NAME
+systemctl daemon-reload  &>>$LOG_FILE_NAME
 VALIDATE $? "daemon reload"
 
 systemctl enable catalogue
@@ -71,10 +71,10 @@ VALIDATE $? "starting catalogue"
 
 cp /home/ec2-user/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 
-dnf install mongodb-mongosh -y &>>LOG_FILE_NAME
+dnf install mongodb-mongosh -y &>>$LOG_FILE_NAME
 VALIDATE $?
 
-mongosh --host mongodb.aslearnings.fun </app/db/master-data.js &>>LOG_FILE_NAME
+mongosh --host mongodb.aslearnings.fun </app/db/master-data.js &>>$LOG_FILE_NAME
 VALIDATE $?
 
 mongosh --host MONGODB-SERVER-IPADDRESS
