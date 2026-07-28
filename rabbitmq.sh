@@ -32,7 +32,7 @@ CHECK_ROOT(){
 echo"script started executing at : $Timestamp"  &>>LOG_FILE_NAME
 CHECK_ROOT
 
-cp home/ec2-user/roboshop-shell/rabbitmq.repo  /etc/yum.repos.d/rabbitmq.repo
+cp /home/ec2-user/roboshop-shell/rabbitmq.repo  /etc/yum.repos.d/rabbitmq.repo
 
 dnf install rabbitmq-server -y  &>>LOG_FILE_NAME
 VALIDATE $? "Installing rabbitmq-server"
