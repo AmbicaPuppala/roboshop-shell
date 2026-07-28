@@ -37,13 +37,14 @@ VALIDATE $? "Installing python"
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
 VALIDATE $? "Adding user"
 
-mkdir /app &>>$LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip &>>$LOG_FILE_NAME
 VALIDATE $? "downloading code"
 
 cd /app  &>>$LOG_FILE_NAME
+rm -rf /app/*
 VALIDATE $? "changing directory"
 
 unzip /tmp/payment.zip &>>$LOG_FILE_NAME
