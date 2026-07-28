@@ -34,16 +34,22 @@ CHECK_ROOT
 dnf install golang -y &>>$LOG_FILE_NAME
 VALIDATE $? "installing golang"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
-VALIDATE $? "adding user"
+if [ $? -ne 0 ]
+then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
+    VALIDATE $? "adding user"
+else
+    echo "User already exists.. skipping"
+fi     
 
-mkdir /app &>>$LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
 
 curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch-v3.zip &>>$LOG_FILE_NAME
 VALIDATE $? "downloading success"
 
 cd /app &>>$LOG_FILE_NAME
+rm -rf /app/*
 VALIDATE $? "changing directory"
 
 unzip /tmp/dispatch.zip &>>$LOG_FILE_NAME
