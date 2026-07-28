@@ -24,6 +24,7 @@ CHECK_ROOT(){
     if[ $USERID -ne 0 ]
     then
         echo -e "you must have root user access $R"
+        exit1
     fi
 }
 
