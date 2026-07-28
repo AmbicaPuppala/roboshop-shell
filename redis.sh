@@ -37,6 +37,10 @@ VALIDATE $? "Disabling old version"
 dnf module enable redis:7 -y &>>LOG_FILE_NAME
 VALIDATE $? "Enabling new version"
 
+sed -i 's/^[[:space:]]*bind[[:space:]].*/bind 0.0.0.0/' /etc/redis.conf
+
+sed -i 's/^[[:space:]]*protected-mode[[:space:]]\+yes/protected-mode no/' /etc/redis.conf
+
 systemctl enable redis &>>LOG_FILE_NAME
 VALIDATE $? "Enabling redis"
 
