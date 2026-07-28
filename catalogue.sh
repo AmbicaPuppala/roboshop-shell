@@ -6,10 +6,10 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-Log_Folder="/var/log/roboshop.logs"
+Log_Folder="/var/log/roboshop-logs"
 Log_File=$(echo $0 |cut -d "." -f1)
 Timestamp=$(date +%Y-%m-%s-%H-%M-%S)
-LOG_FILE_NAME="$Log_Folder+$Log_File+$Timestamp.log"
+LOG_FILE_NAME="$Log_Folder/$Log_File-$Timestamp.log"
 
 VALIDATE(){
     if [ $1 -ne 0 ]
