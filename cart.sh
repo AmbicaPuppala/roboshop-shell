@@ -65,6 +65,7 @@ npm install &>>$LOG_FILE_NAME
 VALIDATE $? "Installing dependencies"
 
 cp /home/ec2-user/roboshop-shell/cart.service /etc/systemd/system/cart.service
+VALIDATE $?
 
 systemctl daemon-reload
 VALIDATE $? "daemon reload"
