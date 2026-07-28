@@ -55,6 +55,7 @@ curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
 VALIDATE $? "Downloading code"
 
 cd /app &>>$LOG_FILE_NAME
+rm -rf /app/*
 VALIDATE $? "changing directory"
 
 unzip /tmp/cart.zip &>>$LOG_FILE_NAME
