@@ -59,7 +59,7 @@ go mod init dispatch &>>$LOG_FILE_NAME
 VALIDATE $? "dispatch"
 
 go get &>>$LOG_FILE_NAME
-VALIDATE $? "build"
+VALIDATE $? "get"
 
 go build &>>$LOG_FILE_NAME
 VALIDATE $? "build"
