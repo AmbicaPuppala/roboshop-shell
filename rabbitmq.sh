@@ -22,9 +22,9 @@ VALIDATE(){
 
 
 CHECK_ROOT(){
-    if[ $USERID -ne 0 ]
+    if [ $USERID -ne 0 ]
     then
-        echo -e "you must have root user access $R"
+        echo "you must have root user access to execute scipt"
         exit1
     fi
 }
