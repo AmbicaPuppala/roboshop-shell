@@ -40,8 +40,13 @@ VALIDATE $? "Enabling new version"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE_NAME
-VALIDATE $? "Adding user"
+if [ $? -ne 0 ]
+then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE_NAME
+    VALIDATE $? "Adding user"
+else
+    echo -e "user already exists ... $Y SKIPPING $N"
+fi    
 
 mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
@@ -50,6 +55,7 @@ curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue
 VALIDATE $? "Downloading code"
 
 cd /app &>>$LOG_FILE_NAME
+rm -rf /app/*
 VALIDATE $? "changing directory"
 
 unzip /tmp/catalogue.zip &>>$LOG_FILE_NAME
@@ -72,9 +78,9 @@ VALIDATE $? "starting catalogue"
 cp /home/ec2-user/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 
 dnf install mongodb-mongosh -y &>>$LOG_FILE_NAME
-VALIDATE $?
+VALIDATE $? "installing success"
 
 mongosh --host mongodb.aslearnings.fun </app/db/master-data.js &>>$LOG_FILE_NAME
-VALIDATE $?
+VALIDATE $? "Loading master data"
 
-mongosh --host MONGODB-SERVER-IPADDRESS
+mongosh --host mongodb.aslearnings.fun
