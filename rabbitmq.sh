@@ -12,13 +12,14 @@ Timestamp=$(date +%Y-%m-%d-%H-%M-%S)
 LOG_FILE_NAME="$Log_Folder+$Log_File-$Timestamp.log"
 
 VALIDATE(){
-    if[ $1 -ne 0 ]
+    if [ $1 -ne 0 ]
     then
-        echo -e "$2 is $R failure $N"
+       echo -e "$2...$R failure $N"
     else
-        echo -e "$2 is $G success $N"
-    fi        
+        echo -e "$2...$G success $N"   
+    fi    
 }
+
 
 CHECK_ROOT(){
     if[ $USERID -ne 0 ]
