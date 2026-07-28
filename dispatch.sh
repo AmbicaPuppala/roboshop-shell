@@ -58,7 +58,10 @@ VALIDATE $? "unzipping"
 go mod init dispatch &>>$LOG_FILE_NAME
 VALIDATE $? "dispatch"
 
-go get &>>$LOG_FILE_NAME
+go get github.com/rabbitmq/amqp091-go &>>$LOG_FILE_NAME
+VALIDATE $? "get"
+
+go mod tidy &>>$LOG_FILE_NAME
 VALIDATE $? "get"
 
 go build &>>$LOG_FILE_NAME
