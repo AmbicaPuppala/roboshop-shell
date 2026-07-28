@@ -84,7 +84,3 @@ mongosh --host mongodb.aslearnings.fun </app/db/master-data.js &>>$LOG_FILE_NAME
 VALIDATE $? "Loading master data"
 
 mongosh --host mongodb.aslearnings.fun
-
-show dbs
-
-use catalogue
