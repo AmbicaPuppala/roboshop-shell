@@ -37,22 +37,23 @@ VALIDATE $? "Installing Maven"
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
 VALIDATE $? "Adding user"
 
-mkdir /app &>>$LOG_FILE_NAME
+mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
 
 curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip &>>$LOG_FILE_NAME
 VALIDATE $? "downloading code"
 
 cd /app &>>$LOG_FILE_NAME
+rm -rf /app/*
 VALIDATE $? "changing directory"
 
-unzip /tmp/shipping.zip
+unzip /tmp/shipping.zip &>>$LOG_FILE_NAME
 VALIDATE $? "unzipping"
 
-mvn clean package 
+mvn clean package &>>$LOG_FILE_NAME
 VALIDATE $? "clean package"
 
-mv target/shipping-1.0.jar shipping.jar 
+mv target/shipping-1.0.jar shipping.jar &>>$LOG_FILE_NAME
 VALIDATE $? "moving jar file"
 
 cp /home/ec2-user/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
