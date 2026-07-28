@@ -40,13 +40,18 @@ VALIDATE $? "Enabling NodeJs"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing NodeJs"
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
-VALIDATE $? "Adding user"
+if [ $? -ne 0 ]
+then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
+    VALIDATE $? "Adding user"
+else
+    echo "User already exists.. skipping"
+fi      
 
-mkdir -p /app &>>$LOG_FILE_NAME
+mkdir -p /app  &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
 
-curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
+curl -L -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Downloading code"
 
 cd /app &>>$LOG_FILE_NAME
