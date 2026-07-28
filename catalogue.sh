@@ -58,6 +58,8 @@ VALIDATE $? "unzipping code"
 npm install &>>LOG_FILE_NAME
 VALIDATE $? "installing dependencies"
 
+cp /home/ec2-user/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service
+
 systemctl daemon-reload  &>>LOG_FILE_NAME
 VALIDATE $? "daemon reload"
 
