@@ -20,30 +20,30 @@ VALIDATE(){
 }
 
 CHECK_ROOT(){
-    if[ $USERID -ne 0]
+    if[ $USERID -ne 0 ]
     then
        echo "you must have root user access to execute script"
        exit1
     fi
 }
 
-echo "script started executing"
+echo "script started executing at :$Timestamp" &>>LOG_FILE_NAME
 CHECK_ROOT
 
 
 cp /home/ec2-user/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
 
-dnf install mongodb-org -y
+dnf install mongodb-org -y &>>LOG_FILE_NAME
 VALIDATE $? "installing mongodb"
 
-systemctl enable mongod
+systemctl enable mongod &>>LOG_FILE_NAME
 VALIDATE $? "Enabling mongodb"
 
-systemctl start mongod
+systemctl start mongod &>>LOG_FILE_NAME
 VALIDATE $? "starting mongodb"
 
 sed -i 's/^#bindIp:.*/bindIp: 0.0.0.0/' /etc.mongod.conf
 
-systemctl restart mongod
+systemctl restart mongod &>>LOG_FILE_NAME
 VALIDATE $? "restarts mongodb service" 
 

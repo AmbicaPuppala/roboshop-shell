@@ -27,5 +27,17 @@ CHECK_ROOT(){
     fi
 }
 
-echo"script started executing"
+echo"script started executing at : $Timestamp" &>>LOG_FILE_NAME
 CHECK_ROOT
+
+cp home/ec2-user/roboshop-shell/rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
+
+dnf install rabbitmq-server -y &>>LOG_FILE_NAME
+VALIDATE $? "Installing rabbitmq-server"
+
+systemctl enable rabbitmq-server &>>LOG_FILE_NAME
+VALIDATE $? "Sstarting rabbitmq-server"
+
+rabbitmqctl add_user roboshop roboshop123
+
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
