@@ -75,5 +75,5 @@ VALIDATE $? "daemon reload"
 systemctl enable dispatch &>>$LOG_FILE_NAME
 VALIDATE $? "enabling dispatch"
 
-systemctl start dispatch $LOG_FILE_NAME
+systemctl start dispatch &>>$LOG_FILE_NAME
 VALIDATE $? "starting dispatch"
