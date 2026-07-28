@@ -76,7 +76,7 @@ dnf install mysql -y  &>>$LOG_FILE_NAME
 VALIDATE $? " installing mysql"
 
 mysql -h mysql.aslearnings.fun -uroot -pRoboShop@1 < /app/db/schema.sql &>>$LOG_FILE_NAME
-VALIDATE $? "schema laoding"
+VALIDATE $? "schema loading"
 
 mysql -h mysql.aslearnings.fun -uroot -pRoboShop@1 < /app/db/app-user.sql &>>$LOG_FILE_NAME
 VALIDATE $? "app user authentication"
