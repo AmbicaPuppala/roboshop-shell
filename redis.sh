@@ -40,9 +40,9 @@ VALIDATE $? "Enabling new version"
 dnf install redis -y &>>LOG_FILE_NAME
 VALIDATE $? "installing new version"
 
-sed -i 's/^[[:space:]]*bind[[:space:]].*/bind 0.0.0.0/' /etc/redis.conf
+sed -i 's/^[[:space:]]*bind[[:space:]].*/bind 0.0.0.0/' /etc/redis/redis.conf
 
-sed -i 's/^[[:space:]]*protected-mode[[:space:]]\+yes/protected-mode no/' /etc/redis.conf
+sed -i 's/^[[:space:]]*protected-mode[[:space:]]\+yes/protected-mode no/' /etc/redis/redis.conf
 
 systemctl enable redis &>>LOG_FILE_NAME
 VALIDATE $? "Enabling redis"
