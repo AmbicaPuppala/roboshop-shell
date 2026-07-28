@@ -59,6 +59,7 @@ unzip /tmp/frontend.zip &>>$LOG_FILE_NAME
 VALIDATE $? "unzipping"
 
 cp /home/ec2-user/roboshop-shell/nginx.conf /etc/nginx/nginx.conf
+VALIDATE $? "conf success"
 
 systemctl restart nginx &>>$LOG_FILE_NAME
 VALIDATE $? "restarting nginx"
