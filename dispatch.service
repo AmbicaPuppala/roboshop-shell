@@ -1,10 +1,9 @@
 [Unit]
-Description = Dispatch Service
+Description=Dispatch Service
+
 [Service]
 User=roboshop
-// highlight-start
 Environment=AMQP_HOST=rabbitmq.aslearnings.fun
-// highlight-end
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=roboshop123
 ExecStart=/app/dispatch
