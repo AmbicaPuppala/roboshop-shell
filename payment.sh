@@ -49,18 +49,18 @@ VALIDATE $? "changing directory"
 unzip /tmp/payment.zip &>>$LOG_FILE_NAME
 VALIDATE $? "unzipping"
 
-pip3 install -r requirements.txt
+pip3 install -r requirements.txt &>>$LOG_FILE_NAME
 VALIDATE $? "installing pip3"
 
 cp /home/ec2-user/roboshop-shell/payment.service /etc/systemd/system/payment.service
 
-systemctl daemon-reload
+systemctl daemon-reload &>>$LOG_FILE_NAME
 VALIDATE $? "daemon reload"
 
-systemctl enable payment
+systemctl enable payment &>>$LOG_FILE_NAME
 VALIDATE $? "enabling payment"
 
-systemctl start payment
+systemctl start payment &>>$LOG_FILE_NAME
 VALIDATE $? "starting payment"
 
 
