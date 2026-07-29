@@ -47,6 +47,7 @@ systemctl start mongod &>>LOG_FILE_NAME
 VALIDATE $? "starting mongodb"
 
 sed -i 's/^[[:space:]]*bindIp:.*/  bindIp: 0.0.0.0/' /etc/mongod.conf
+VALIDATE $? "bindip changing"
 
 systemctl restart mongod &>>LOG_FILE_NAME
 VALIDATE $? "restarts mongodb service" 
