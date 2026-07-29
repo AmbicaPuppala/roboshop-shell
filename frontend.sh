@@ -28,7 +28,10 @@ CHECK_ROOT(){
     fi
 }
 
+mkdir -p $Log_Folder
+
 echo "script started ececuting at : $Timestamp" &>>$LOG_FILE_NAME
+
 CHECK_ROOT
 
 dnf module disable nginx -y &>>$LOG_FILE_NAME

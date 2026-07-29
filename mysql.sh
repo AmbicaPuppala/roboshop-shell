@@ -28,7 +28,10 @@ CHECK_ROOT(){
     fi
 }
 
+mkdir -p $Log_Folder
+
 echo "script statrted executing at: $Timestamp" &>>LOG_FILE_NAME
+
 CHECK_ROOT
 
 dnf install mysql-server -y &>>LOG_FILE_NAME

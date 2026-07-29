@@ -28,7 +28,10 @@ CHECK_ROOT(){
     fi
 }
 
+mkdir -p $Log_Folder
+
 echo"script started executing at : $Timestamp"  &>>LOG_FILE_NAME
+
 CHECK_ROOT
 
 cp /home/ec2-user/roboshop-shell/rabbitmq.repo  /etc/yum.repos.d/rabbitmq.repo

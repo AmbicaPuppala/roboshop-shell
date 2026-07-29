@@ -27,12 +27,15 @@ CHECK_ROOT(){
     fi
 }
 
+mkdir -p $Log_Folder
 
 echo "script started executing at :$Timestamp" &>>LOG_FILE_NAME
+
 CHECK_ROOT
 
 
 cp /home/ec2-user/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo
+VALIDATE $? "set Repo"
 
 dnf install mongodb-org -y &>>LOG_FILE_NAME
 VALIDATE $? "installing mongodb"
