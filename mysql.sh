@@ -30,24 +30,24 @@ CHECK_ROOT(){
 
 mkdir -p $Log_Folder
 
-echo "script statrted executing at: $Timestamp" &>>LOG_FILE_NAME
+echo "script statrted executing at: $Timestamp" &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf install mysql-server -y &>>LOG_FILE_NAME
+dnf install mysql-server -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Mysql server"
 
-systemctl enable mysqld &>>LOG_FILE_NAME
+systemctl enable mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling Mysql server"
 
-systemctl start mysqld &>>LOG_FILE_NAME
+systemctl start mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "starting Mysql server"
 
-mysql -h mysql.aslearnings.fun -u root -pRoboShop@1 -e 'show databases;' &>>LOG_FILE_NAME 
+mysql -h mysql.aslearnings.fun -u root -pRoboShop@1 -e 'show databases;' &>>$LOG_FILE_NAME 
 
 if [ $? -ne 0 ]
 then
-    echo "MySQL Root password not setup" &>>LOG_FILE_NAME 
+    echo "MySQL Root password not setup" &>>$LOG_FILE_NAME 
     mysql_secure_installation --set-root-pass RoboShop@1 
     VALIDATE $? "setting root password"
 else

@@ -30,17 +30,17 @@ CHECK_ROOT(){
 
 mkdir -p $Log_Folder
 
-echo"script started executing at : $Timestamp"  &>>LOG_FILE_NAME
+echo"script started executing at : $Timestamp"  &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
-dnf module disable redis -y &>>LOG_FILE_NAME
+dnf module disable redis -y &>>$LOG_FILE_NAME
 VALIDATE $? "Disabling old version"
 
-dnf module enable redis:7 -y &>>LOG_FILE_NAME
+dnf module enable redis:7 -y &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling new version"
 
-dnf install redis -y &>>LOG_FILE_NAME
+dnf install redis -y &>>$LOG_FILE_NAME
 VALIDATE $? "installing new version"
 
 sed -i 's/^[[:space:]]*bind[[:space:]].*/bind 0.0.0.0/' /etc/redis/redis.conf
@@ -49,8 +49,8 @@ VALIDATE $? "bindip changing"
 sed -i 's/^[[:space:]]*protected-mode[[:space:]]\+yes/protected-mode no/' /etc/redis/redis.conf
 VALIDATE $? "protectedmode changing"
 
-systemctl enable redis &>>LOG_FILE_NAME
+systemctl enable redis &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling redis"
 
-systemctl start redis  &>>LOG_FILE_NAME
+systemctl start redis  &>>$LOG_FILE_NAME
 VALIDATE $? "starting redis"

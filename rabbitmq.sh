@@ -30,19 +30,19 @@ CHECK_ROOT(){
 
 mkdir -p $Log_Folder
 
-echo"script started executing at : $Timestamp"  &>>LOG_FILE_NAME
+echo"script started executing at : $Timestamp"  &>>$LOG_FILE_NAME
 
 CHECK_ROOT
 
 cp /home/ec2-user/roboshop-shell/rabbitmq.repo  /etc/yum.repos.d/rabbitmq.repo
 
-dnf install rabbitmq-server -y  &>>LOG_FILE_NAME
+dnf install rabbitmq-server -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing rabbitmq-server"
 
-systemctl enable rabbitmq-server  &>>LOG_FILE_NAME
+systemctl enable rabbitmq-server  &>>$LOG_FILE_NAME
 VALIDATE $? "enabling rabbitmq-server"
 
-systemctl start rabbitmq-server &>>LOG_FILE_NAME
+systemctl start rabbitmq-server &>>$LOG_FILE_NAME
 VALIDATE $? "Starting rabbitmq-server"
 
 if rabbitmqctl list_users | awk '{print $1}' | grep -qx "roboshop";
