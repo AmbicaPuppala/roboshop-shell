@@ -43,13 +43,8 @@ VALIDATE $? "Enabling new version"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-if [ $? -ne 0 ]
-then
-    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE_NAME
-    VALIDATE $? "Adding user"
-else
-    echo -e "user already exists ... $Y SKIPPING $N"
-fi    
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop  &>>$LOG_FILE_NAME
+VALIDATE $? "Adding user"
 
 mkdir -p /app &>>$LOG_FILE_NAME
 VALIDATE $? "creating directory"
