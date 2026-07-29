@@ -28,6 +28,8 @@ CHECK_ROOT(){
 }
 
 mkdir -p $Log_Folder
+echo $Log_Folder
+echo $LOG_FILE_NAME
 
 echo "script started executing at :$Timestamp" &>>LOG_FILE_NAME
 
