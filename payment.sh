@@ -37,6 +37,8 @@ CHECK_ROOT
 dnf install python3 gcc python3-devel -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing python"
 
+id roboshop
+
 if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME

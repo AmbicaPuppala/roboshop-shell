@@ -37,6 +37,8 @@ CHECK_ROOT
 dnf install maven -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Maven"
 
+id roboshop
+
 if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME

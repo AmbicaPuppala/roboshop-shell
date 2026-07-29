@@ -37,6 +37,8 @@ CHECK_ROOT
 dnf install golang -y &>>$LOG_FILE_NAME
 VALIDATE $? "installing golang"
 
+id roboshop
+
 if [ $? -ne 0 ]
 then
     useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop &>>$LOG_FILE_NAME
